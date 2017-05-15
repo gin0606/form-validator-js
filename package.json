@@ -1,5 +1,6 @@
 {
   "name": "@gin0606/form-validator",
+  "description": "Validator for form value",
   "publishConfig": {
     "access": "public"
   },
@@ -7,6 +8,10 @@
   "main": "lib/index.js",
   "author": "gin0606 <kkgn06@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "url": "git+https://github.com/gin0606/form-validator-js.git",
+    "type": "git"
+  },
   "scripts": {
     "build": "NODE_ENV=production babel src --out-dir lib",
     "build:flow": "flow gen-flow-files src/index.js --out-dir lib/",
