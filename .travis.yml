@@ -1,13 +1,21 @@
 language: node_js
 node_js:
-  - "7"
+- '7'
 cache:
   yarn: true
   directories:
-    - node_modules
+  - node_modules
 script:
-  - yarn flow
-  - yarn lint
-  - yarn test
-  - yarn build
-  - yarn build:flow
+- yarn flow
+- yarn lint
+- yarn test
+- yarn build
+- yarn build:flow
+deploy:
+  provider: npm
+  email: kkgn06@gmail.com
+  api_key:
+    secure: GsdRCTcNzf2e5YvDFrG30M25pwelogaFgqpiVUNhE7+qYp0ofpcT63onG2ZTFwkmTKQZSNjEVxZeGAXzRfrgI9GYPP+Y2Ir65VeJCXHKtThglVewNcgpfBlxjg85Nhol5xpIrq/LF6rlmNBVM2VPzCCLoqb9oL2BinB6WBWv/WBNfSyrJiBISdPpetsSAK2dnpTgTB5MA1Hg1tk5fCnUU+SiVraSRH0osaCq+MEufzFKKUc8e39RMdTWM2w4VTrYqgPaC2QPRo0g0IrE/urzKs7T9iiXLXpWEdbEl3o0pl903Hd60FML3h/ugtGdRHAIdejkp3BonbHdTSZKNbnkF4yjj2U5QERyynzEjBiB3Q5QlvH/x6paUlLaW1FwLBaOpalPzRTBYwonGItbcfl5VD8+/njI5LKcjKxR6LpzO8nhSYUahPNqQWHncVsaaUNS/zXCTTxuBujVdjacri/T5JAy9YKGYbvjDMvqgJt1hzlDeEtNsXsoy0ZHKP5EIBTbycCiT7vcqaSgECUps6om6tTGLSF6zfIC9XhCupj3FkSYLk4NW2TGzS4qrsbXkBFd1Da/Vfv4EZIAwdalhZwxV/QQRM1z157Fa/S5akzBCzMddkgD2dg1FPTsyVT0CEZ3nlJ8MyEWMr3UE2lk0Ylqe6KtlGzgjL1Jbke2QSu/MxU=
+  on:
+    tags: true
+    repo: gin0606/form-validator-js
