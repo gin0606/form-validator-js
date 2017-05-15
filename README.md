@@ -1,5 +1,5 @@
 # form-validator-js
-## Instalation
+## Installation
 ```sh
 npm install --save @gin0606/form-validator
 
