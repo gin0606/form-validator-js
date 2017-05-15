@@ -1,0 +1,47 @@
+parser: babel-eslint
+extends:
+  - airbnb
+  - plugin:flowtype/recommended
+env:
+  browser: true
+  mocha: true
+plugins:
+  - react
+  - jsx-a11y
+  - import
+  - flowtype
+  - eslint-comments
+settings:
+  import/core-modules:
+    - electron
+  import/resolver: webpack
+  flowtype:
+    onlyFilesWithFlowAnnotation: true
+rules:
+  max-len:
+    - off
+  class-methods-use-this:
+    - off
+  arrow-body-style:
+    - off
+  react/sort-comp:
+    - error
+    - order:
+      - 'type-annotations'
+      - 'static-methods'
+      - 'lifecycle'
+      - '/^on.+$/'
+      - '/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/'
+      - 'everything-else'
+      - '/^render.+$/'
+      - 'render'
+  eslint-comments/disable-enable-pair:
+    - error
+  eslint-comments/no-duplicate-disable:
+    - error
+  eslint-comments/no-unlimited-disable:
+    - error
+  eslint-comments/no-unused-disable:
+    - error
+  eslint-comments/no-unused-enable:
+    - error

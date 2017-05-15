@@ -1,0 +1,10 @@
+[ignore]
+
+[include]
+
+[libs]
+
+[options]
+experimental.const_params=true
+
+esproposal.export_star_as=enable

@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    "transform-runtime",
+    "transform-export-extensions"
+  ],
+  "presets": [
+    "env",
+    "flow",
+    "power-assert"
+  ]
+}

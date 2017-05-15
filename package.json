@@ -1,0 +1,49 @@
+{
+  "name": "@gin0606/form-validator",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "author": "gin0606 <kkgn06@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "NODE_ENV=production babel src --out-dir lib",
+    "build:flow": "flow gen-flow-files src/index.js --out-dir lib/",
+    "lint": "eslint \"./src/**/*.{js,jsx}\" \"./src/*.{js,jsx}\" \"./*.js\"",
+    "test": "NODE_ENV=test NODE_PATH=$NODE_PATH:$PWD/src mocha \"test/**/*.js\" --opts ./mocha.opts",
+    "prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-power-assert": "^1.0.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-import-resolver-webpack": "^0.8.1",
+    "eslint-plugin-eslint-comments": "^1.0.0",
+    "eslint-plugin-flowtype": "^2.30.4",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2 || ^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
+    "flow-bin": "^0.46.0",
+    "flow-typed": "^2.1.2",
+    "mocha": "^3.4.1",
+    "power-assert": "^1.4.2"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.23.0",
+    "lodash.bind": "^4.2.1",
+    "lodash.findindex": "^4.6.0",
+    "lodash.inrange": "^3.3.6",
+    "lodash.isempty": "^4.4.0",
+    "lodash.isequal": "^4.5.0",
+    "lodash.isfunction": "^3.0.8",
+    "validator": "^7.0.0"
+  }
+}
