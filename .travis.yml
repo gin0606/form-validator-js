@@ -10,7 +10,6 @@ script:
 - yarn lint
 - yarn test
 - yarn build
-- yarn build:flow
 deploy:
   provider: npm
   email: kkgn06@gmail.com

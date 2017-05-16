@@ -1,0 +1,90 @@
+// @flow
+
+import type {RuleType as _RuleType, RulesType as _RulesType} from "./Rules";
+import type {FormRule as _FormRule} from "./FormValidator";
+import _FormValidator from "./FormValidator";
+import rules from "./Rules";
+import _FormResult from "./FormResult";
+declare class Class1 {
+
+}
+declare class Class0 extends Class1<> {
+
+}
+declare class Class2 extends Class1<> {
+
+  types: Array<string>;
+  constructor(types: Array<string>): void | void;
+}
+declare class Class3 extends Class1<> {
+
+}
+declare class Class4 extends Class1<> {
+
+  size: number;
+  constructor(size: number): void | void;
+}
+declare class Class5 extends Class1<> {
+
+  max: number;
+  constructor(max: number): void | void;
+}
+declare class Class6 extends Class1<> {
+
+  min: number;
+  constructor(min: number): void | void;
+}
+declare class Class7 extends Class1<> {
+
+}
+declare class Class8 extends Class1<> {
+
+  choices: Array<any>;
+  constructor(choices: Array<any>): void | void;
+}
+export type Class10 = RegExp
+declare class Class9 extends Class1<> {
+
+  pattern: Class10;
+  constructor(pattern: Class10): void | void;
+}
+declare class Class11 extends Class1<> {
+
+}
+declare class Class12 extends Class1<> {
+
+}
+declare class Class13 extends Class1<> {
+
+  max: number;
+  min: number;
+  constructor(min: number, max: number): void | void;
+}
+declare class Class14 extends Class1<> {
+
+  pattern: Class10;
+  constructor(pattern: Class10): void | void;
+}
+declare class Class15 extends Class1<> {
+
+  max: number;
+  min: number;
+  constructor(min: number, max: number): void | void;
+}
+declare export var Errors: {AcceptEmailError: Class0, AcceptImageError: Class2, AcceptJsonFileError: Class3, FileSizeError: Class4, MaxLengthError: Class5, MinLengthError: Class6, MustBeAcceptedError: Class7, MustBelongsToError: Class8, MustMatchRegExpError: Class9, MustNotBeEmptyError: Class11, PasswordConfirmError: Class12, PasswordLengthError: Class13, PasswordPatternError: Class14, RangeError: Class15, ValidationError: Class1};
+declare export class FormResult {
+
+  formErrors: {[_: string]: Array<Class1>};
+  constructor(formErrors: {[_: string]: Array<Class1>}): void | void;
+  errors(): {[_: string]: Array<Class1>};
+}
+export type FormRule = {[_: string]: Array<$Exact<{verify: (_: any) => Promise<?Class1>}>>};
+declare export class FormValidator {
+
+  rule: {[_: string]: Array<$Exact<{verify: (_: any) => Promise<?Class1>}>>};
+  constructor(rule: {[_: string]: Array<$Exact<{verify: (_: any) => Promise<?Class1>}>>}): void | void;
+  validate(values: {[_: string]: mixed}): Promise<FormResult>;
+}
+export type RuleType = $Exact<{verify: (_: any) => Promise<?Class1>}>;
+declare export var Rules: {acceptEmail: () => $Exact<{verify: (_: any) => Promise<?Class1>}>, acceptImage: () => $Exact<{verify: (_: any) => Promise<?Class1>}>, acceptJson: () => $Exact<{verify: (_: any) => Promise<?Class1>}>, cantBeEmpty: () => $Exact<{verify: (_: any) => Promise<?Class1>}>, fileSize: (size: number) => $Exact<{verify: (_: any) => Promise<?Class1>}>, matchPattern: (pattern: Class10) => $Exact<{verify: (_: any) => Promise<?Class1>}>, maxLength: (max: number) => $Exact<{verify: (_: any) => Promise<?Class1>}>, minLength: (min: number) => $Exact<{verify: (_: any) => Promise<?Class1>}>, mustBeAccepted: () => $Exact<{verify: (_: any) => Promise<?Class1>}>, oneOf: (choices: Array<any>) => $Exact<{verify: (_: any) => Promise<?Class1>}>, passwordConfirm: (key: string) => $Exact<{verify: (_: any) => Promise<?Class1>}>, passwordPattern: () => $Exact<{verify: (_: any) => Promise<?Class1>}>, range: (min: number, max: number) => $Exact<{verify: (_: any) => Promise<?Class1>}>};
+export type RulesType = $Exact<{acceptEmail: () => $Exact<{verify: (_: any) => Promise<?Class1>}>, acceptImage: () => $Exact<{verify: (_: any) => Promise<?Class1>}>, acceptJson: () => $Exact<{verify: (_: any) => Promise<?Class1>}>, cantBeEmpty: () => $Exact<{verify: (_: any) => Promise<?Class1>}>, fileSize: (size: number) => $Exact<{verify: (_: any) => Promise<?Class1>}>, matchPattern: (pattern: Class10) => $Exact<{verify: (_: any) => Promise<?Class1>}>, maxLength: (max: number) => $Exact<{verify: (_: any) => Promise<?Class1>}>, minLength: (min: number) => $Exact<{verify: (_: any) => Promise<?Class1>}>, mustBeAccepted: () => $Exact<{verify: (_: any) => Promise<?Class1>}>, oneOf: (choices: Array<any>) => $Exact<{verify: (_: any) => Promise<?Class1>}>, passwordConfirm: (key: string) => $Exact<{verify: (_: any) => Promise<?Class1>}>, passwordPattern: () => $Exact<{verify: (_: any) => Promise<?Class1>}>, range: (min: number, max: number) => $Exact<{verify: (_: any) => Promise<?Class1>}>}>;
