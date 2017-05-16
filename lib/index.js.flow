@@ -1,0 +1,103 @@
+// @flow
+declare class ValidationError {}
+declare class MustBeAcceptedError extends ValidationError {
+}
+declare class MustNotBeEmptyError extends ValidationError {
+}
+declare class MustMatchRegExpError extends ValidationError {
+  pattern: RegExp;
+  constructor(pattern: RegExp): void;
+}
+declare class RangeError extends ValidationError {
+  min: number;
+  max: number;
+
+  constructor(min: number, max: number): void
+}
+declare class MinLengthError extends ValidationError {
+  min: number;
+  constructor(min: number): void
+}
+declare class MaxLengthError extends ValidationError {
+  max: number;
+  constructor(max: number): void
+}
+declare class MustBelongsToError extends ValidationError {
+  choices: Array<any>;
+  constructor(choices: Array<any>): void
+}
+declare class PasswordLengthError extends ValidationError {
+  min: number;
+  max: number;
+  constructor(min: number, max: number): void
+}
+declare class PasswordPatternError extends ValidationError {
+  pattern: RegExp;
+  constructor(pattern: RegExp): void
+}
+declare class PasswordConfirmError extends ValidationError {
+}
+declare class AcceptEmailError extends ValidationError {
+}
+declare class AcceptImageError extends ValidationError {
+  types: Array<string>;
+  constructor(types: Array<string>): void
+}
+declare class AcceptJsonFileError extends ValidationError {
+}
+declare class FileSizeError extends ValidationError {
+  size: number;
+  constructor(size: number): void
+}
+
+export type type RuleType = {|
+  verify: (any) => Promise<?ValidationError>,
+|}
+
+declare export class FormResult {
+  formErrors: {[_: string]: Array<ValidationError>};
+  constructor(formErrors: {[_: string]: Array<ValidationError>}): void;
+  errors(): {[_: string]: Array<ValidationError>};
+}
+
+declare export class FormValidator {
+  rule: {[_: string]: Array<$Exact<{verify: (_: any) => Promise<?ValidationError>}>>};
+  constructor(rule: {[_: string]: Array<$Exact<{verify: (_: any) => Promise<?ValidationError>}>>}): void;
+  validate(values: {[_: string]: mixed}): Promise<FormResult>;
+}
+
+declare export var Errors: {
+  ValidationError: Class<ValidationError>,
+  AcceptEmailError: Class<AcceptEmailError>,
+  AcceptImageError: Class<AcceptImageError>,
+  AcceptJsonFileError: Class<AcceptJsonFileError>,
+  FileSizeError: Class<FileSizeError>,
+  MaxLengthError: Class<MaxLengthError>,
+  MinLengthError: Class<MinLengthError>,
+  MustBeAcceptedError: Class<MustBeAcceptedError>,
+  MustBelongsToError: Class<MustBelongsToError>,
+  MustMatchRegExpError: Class<MustMatchRegExpError>,
+  MustNotBeEmptyError: Class<MustNotBeEmptyError>,
+  PasswordConfirmError: Class<PasswordConfirmError>,
+  PasswordLengthError: Class<PasswordLengthError>,
+  PasswordPatternError: Class<PasswordPatternError>,
+  RangeError: Class<RangeError>,
+};
+
+export type FormRule = {[_: string]: Array<$Exact<{verify: (_: any) => Promise<?ValidationError>}>>};
+
+declare export var Rules: {
+  mustBeAccepted: () => RuleType,
+  cantBeEmpty: () => RuleType,
+  matchPattern: (pattern: RegExp) => RuleType,
+  range: (min: number, max: number) => RuleType,
+  minLength: (min: number) => RuleType,
+  maxLength: (max: number) => RuleType,
+  oneOf: (choices: Array<any>) => RuleType,
+  passwordPattern: () => RuleType,
+  passwordConfirm: (key: string) => RuleType,
+  acceptEmail: () => RuleType,
+  acceptImage: () => RuleType,
+  acceptJson: () => RuleType,
+  fileSize: (size: number) => RuleType,
+};
