@@ -11,27 +11,27 @@ const isNotEmpty = (v) => (!isEmpty(v));
 const PasswordPattern = /^[\w\d!#$%&*+-.,:;?@^`'"|~=<>/\\()[\]{}]*$/;
 
 // Promise は reject 時の型を指定出来ないので Validation に失敗しても resolve としてる
-export type Rule = {|
+export type RuleType = {|
   verify: (any) => Promise<?Errors.ValidationError>,
 |}
 
-type Rules = {|
-  mustBeAccepted: () => Rule,
-  cantBeEmpty: () => Rule,
-  matchPattern: (pattern: RegExp) => Rule,
-  range: (min: number, max: number) => Rule,
-  minLength: (min: number) => Rule,
-  maxLength: (max: number) => Rule,
-  oneOf: (choices: Array<any>) => Rule,
-  passwordPattern: () => Rule,
-  passwordConfirm: (key: string) => Rule,
-  acceptEmail: () => Rule,
-  acceptImage: () => Rule,
-  acceptJson: () => Rule,
-  fileSize: (size: number) => Rule,
+export type RulesType = {|
+  mustBeAccepted: () => RuleType,
+  cantBeEmpty: () => RuleType,
+  matchPattern: (pattern: RegExp) => RuleType,
+  range: (min: number, max: number) => RuleType,
+  minLength: (min: number) => RuleType,
+  maxLength: (max: number) => RuleType,
+  oneOf: (choices: Array<any>) => RuleType,
+  passwordPattern: () => RuleType,
+  passwordConfirm: (key: string) => RuleType,
+  acceptEmail: () => RuleType,
+  acceptImage: () => RuleType,
+  acceptJson: () => RuleType,
+  fileSize: (size: number) => RuleType,
 |}
 
-const rules: Rules = {
+const rules: RulesType = {
   mustBeAccepted: () => ({
     verify: (v: boolean) => Promise.resolve(v ? null : new Errors.MustBeAcceptedError()),
   }),

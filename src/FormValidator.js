@@ -1,10 +1,10 @@
 // @flow
 /* eslint arrow-parens: ["error", "always"] */
-import type { Rule } from './Rules';
+import type { RuleType } from './Rules';
 import FormResult from './FormResult';
 
 export type FormRule = {
-  [string]: Array<Rule>
+  [string]: Array<RuleType>
 }
 
 export default class FormValidator {
