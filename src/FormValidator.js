@@ -1,7 +1,12 @@
 // @flow
 /* eslint arrow-parens: ["error", "always"] */
-import type { RuleType } from './Rules';
 import FormResult from './FormResult';
+import ValidationError from './Errors';
+
+// Promise は reject 時の型を指定出来ないので Validation に失敗しても resolve としてる
+export type RuleType = {|
+  verify: (any, { [string]: mixed }) => Promise<?ValidationError>,
+|}
 
 export type FormRule = {
   [string]: Array<RuleType>

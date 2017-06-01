@@ -1,5 +1,5 @@
 // @flow
-import { ValidationError } from './Errors';
+import ValidationError from './Errors';
 
 export default class FormResult {
   formErrors: { [string]: Array<ValidationError> };

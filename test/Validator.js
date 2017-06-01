@@ -1,11 +1,37 @@
 // @flow
 import assert from 'assert';
-import isEmpty from 'lodash.isempty';
-import Rules from '../src/Rules';
+import validatorjs from 'validator';
 import FormValidator from '../src/FormValidator';
-import { includes } from '../src/utils/array';
-import * as Errors from '../src/Errors';
+import ValidationError from '../src/Errors';
 
+function includes<T>(array: Array<T>, compare: T => boolean): boolean {
+  const index = array.findIndex(compare);
+  return index !== -1;
+}
+const isNotEmpty = (v: string) => (v && v.length > 0);
+
+class MustBeAcceptedError extends ValidationError {}
+class MustNotBeEmptyError extends ValidationError {}
+class MustMatchRegExpError extends ValidationError {
+  pattern: RegExp
+  constructor(pattern: RegExp) {
+    super();
+    this.pattern = pattern;
+  }
+}
+
+const Rules = {
+  mustBeAccepted: () => ({
+    verify: (v: boolean) => Promise.resolve(v ? null : new MustBeAcceptedError()),
+  }),
+  cantBeEmpty: () => ({
+    verify: (v: string) => Promise.resolve((isNotEmpty(v) ? null : new MustNotBeEmptyError())),
+  }),
+  matchPattern: (pattern: RegExp) => ({
+    verify: (v: string) => Promise.resolve(((v && validatorjs.matches(v, pattern))
+      ? null : new MustMatchRegExpError(pattern))),
+  }),
+};
 
 describe('FormValidator', () => {
   describe('#validate', () => {
@@ -25,8 +51,8 @@ describe('FormValidator', () => {
           };
           return validator.validate(values).then((result) => {
             const errors = result.errors();
-            assert.ok(isEmpty(errors.key1));
-            assert.ok(isEmpty(errors.key2));
+            assert.ok(errors.key1.length === 0);
+            assert.ok(errors.key2.length === 0);
           });
         });
       });
@@ -40,9 +66,9 @@ describe('FormValidator', () => {
             const errors = result.errors();
             assert.equal(errors.key1.length, 1);
             assert.equal(errors.key2.length, 1);
-            assert.ok(includes(errors.key1, (e) => { return e instanceof Errors.MustNotBeEmptyError; }));
+            assert.ok(includes(errors.key1, (e) => { return e instanceof MustNotBeEmptyError; }));
             assert.ok(includes(errors.key2, (e) => {
-              return (e instanceof Errors.MustMatchRegExpError) && e.pattern === pattern;
+              return (e instanceof MustMatchRegExpError) && e.pattern === pattern;
             }));
           });
         });
@@ -58,9 +84,9 @@ describe('FormValidator', () => {
             assert.ok(errors.key2);
             assert.equal(errors.key1.length, 1);
             assert.equal(errors.key2.length, 1);
-            assert.ok(includes(errors.key1, (e) => { return e instanceof Errors.MustNotBeEmptyError; }));
+            assert.ok(includes(errors.key1, (e) => { return e instanceof MustNotBeEmptyError; }));
             assert.ok(includes(errors.key2, (e) => {
-              return (e instanceof Errors.MustMatchRegExpError) && e.pattern === pattern;
+              return (e instanceof MustMatchRegExpError) && e.pattern === pattern;
             }));
           });
         });
@@ -84,8 +110,8 @@ describe('FormValidator', () => {
           };
           return validator.validate(values).then((result) => {
             const errors = result.errors();
-            assert.ok(isEmpty(errors.key1));
-            assert.ok(isEmpty(errors.key2));
+            assert.ok(errors.key1.length === 0);
+            assert.ok(errors.key2.length === 0);
           });
         });
       });
@@ -99,15 +125,15 @@ describe('FormValidator', () => {
             const errors = result.errors();
             assert.equal(errors.key1.length, 2);
             assert.equal(errors.key2.length, 2);
-            assert.ok(includes(errors.key1, (e) => { return e instanceof Errors.MustNotBeEmptyError; }));
+            assert.ok(includes(errors.key1, (e) => { return e instanceof MustNotBeEmptyError; }));
             assert.ok(includes(errors.key1, (e) => {
-              return (e instanceof Errors.MustMatchRegExpError) && e.pattern === hogePattern;
+              return (e instanceof MustMatchRegExpError) && e.pattern === hogePattern;
             }));
             assert.ok(includes(errors.key2, (e) => {
-              return (e instanceof Errors.MustMatchRegExpError) && e.pattern === hogePattern;
+              return (e instanceof MustMatchRegExpError) && e.pattern === hogePattern;
             }));
             assert.ok(includes(errors.key2, (e) => {
-              return (e instanceof Errors.MustMatchRegExpError) && e.pattern === fugaPattern;
+              return (e instanceof MustMatchRegExpError) && e.pattern === fugaPattern;
             }));
           });
         });
