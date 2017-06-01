@@ -17,7 +17,7 @@
     "build:flow": "flow gen-flow-files src/index.js --out-dir lib/",
     "lint": "eslint \"./src/**/*.{js,jsx}\" \"./src/*.{js,jsx}\" \"./*.js\"",
     "test": "NODE_ENV=test NODE_PATH=$NODE_PATH:$PWD/src mocha \"test/**/*.js\" --opts ./mocha.opts",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build && npm run build:flow"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
