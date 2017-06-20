@@ -5,7 +5,7 @@ import ValidationError from './Errors';
 
 // Promise は reject 時の型を指定出来ないので Validation に失敗しても resolve としてる
 export type RuleType = {|
-  verify: (any, { [string]: mixed }) => Promise<?ValidationError>,
+  verify: (any, { [string]: any }) => Promise<?ValidationError>,
 |}
 
 export type FormRule = {
@@ -19,7 +19,7 @@ export default class FormValidator {
     this.rule = rule;
   }
 
-  async validate(values: { [string]: mixed }): Promise<FormResult> {
+  async validate(values: { [string]: any }): Promise<FormResult> {
     const errorPromises = Object.keys(this.rule).map(async (key) => {
       const rules = this.rule[key];
       return Promise.all(rules.map((rule) => (rule.verify(values[key], values))))
