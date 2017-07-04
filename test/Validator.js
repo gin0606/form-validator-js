@@ -91,6 +91,22 @@ describe('FormValidator', () => {
           });
         });
       });
+      context('with null', () => {
+        const values = null;
+        it('should return error', () => {
+          return validator.validate(values).then((result) => {
+            const errors = result.errors();
+            assert.ok(errors.key1);
+            assert.ok(errors.key2);
+            assert.equal(errors.key1.length, 1);
+            assert.equal(errors.key2.length, 1);
+            assert.ok(includes(errors.key1, (e) => { return e instanceof MustNotBeEmptyError; }));
+            assert.ok(includes(errors.key2, (e) => {
+              return (e instanceof MustMatchRegExpError) && e.pattern === pattern;
+            }));
+          });
+        });
+      });
     });
     context('plural rules', () => {
       const hogePattern = /.*hoge.*/i;

@@ -19,10 +19,11 @@ export default class FormValidator {
     this.rule = rule;
   }
 
-  async validate(values: { [string]: any }): Promise<FormResult> {
+  async validate(values: ?{ [string]: any }): Promise<FormResult> {
     const errorPromises = Object.keys(this.rule).map(async (key) => {
       const rules = this.rule[key];
-      return Promise.all(rules.map((rule) => (rule.verify(values[key], values))))
+      const v: { [string]: any } = values || {};
+      return Promise.all(rules.map((rule) => (rule.verify(v[key], v))))
         .then((e) => ({ [key]: e }));
     });
     const formErrors = await Promise.all(errorPromises)
